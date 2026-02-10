@@ -233,7 +233,7 @@ with st.sidebar:
                 st.markdown("---")
               
 # --- NOVIDADE: SEÇÃO DE RECORDES DO ANO ---
-                  st.markdown(f"### 🏆 Recordes de {ano_sel}")
+   st.markdown(f"### 🏆 Recordes de {ano_sel}")
             
             # Encontrando os valores extremos no dataframe filtrado
             linha_max = df_exibicao.loc[df_exibicao['preco'].idxmax()]
@@ -330,6 +330,7 @@ Use sotaque goiano e seja direto.
     
 
     
+
 
 
 

@@ -258,7 +258,7 @@ if botao_ia:
     else:
         with st.spinner("IA analisando tendências da Ceasa..."):
             try:
-                model = genai.GenerativeModel("gemini-pro")
+                model = genai.GenerativeModel('gemini-1.5-flash')
 
                 dados_resumo = df_exibicao.tail(10)[["data", "preco"]].to_string(index=False)
 
@@ -280,4 +280,5 @@ Use sotaque goiano e seja direto.
 
 
     
+
     

@@ -212,6 +212,10 @@ if not df.empty:
             if len(df_exibicao) > 1:
                 preco_anterior = df_exibicao.iloc[-2]['preco']
                 variacao = ((ultimo_preco - preco_anterior) / preco_anterior) * 100
+            col1, col2, col3 = st.columns(3)
+            col1.metric(f"Preço Atual (C{classe_sel})", f"R$ {ultimo_preco:.2f}", f"{variacao:.1f}%")
+            col2.metric("Tendência", "Alta" if variacao > 0 else ("Baixa" if variacao < 0 else "Estável"))
+            col3.metric("Status", "Favorável" if variacao >= 0 else "Atenção")
 with st.sidebar:
                 st.markdown("---") # Linha divisória
                 st.markdown("### 💰 Simulador de Lucro")
@@ -227,10 +231,7 @@ with st.sidebar:
                 st.success(f"Receita Bruta: **R$ {lucro_estimado:,.2f}**")
                 st.info(f"Preço Base: R$ {ultimo_preco:.2f} /un")
                 st.markdown("---")
-            col1, col2, col3 = st.columns(3)
-            col1.metric(f"Preço Atual (C{classe_sel})", f"R$ {ultimo_preco:.2f}", f"{variacao:.1f}%")
-            col2.metric("Tendência", "Alta" if variacao > 0 else ("Baixa" if variacao < 0 else "Estável"))
-            col3.metric("Status", "Favorável" if variacao >= 0 else "Atenção")
+              
 # --- NOVIDADE: SEÇÃO DE RECORDES DO ANO ---
             st.markdown(f"### 🏆 Recordes de {ano_sel}")
             
@@ -329,6 +330,7 @@ Use sotaque goiano e seja direto.
     
 
     
+
 
 
 

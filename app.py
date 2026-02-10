@@ -73,7 +73,6 @@ st.markdown("""
         border: 1px solid rgba(255, 255, 255, 0.2) !important;
     }
 
-    /* 3. A SOLUÇÃO DEFINITIVA: Forçar a cor de TODOS os textos dentro do Selectbox */
     div[data-baseweb="select"] * {
         color: white !important;
         -webkit-text-fill-color: white !important; /* Força em navegadores como Chrome/Safari */
@@ -213,7 +212,21 @@ if not df.empty:
             if len(df_exibicao) > 1:
                 preco_anterior = df_exibicao.iloc[-2]['preco']
                 variacao = ((ultimo_preco - preco_anterior) / preco_anterior) * 100
-
+with st.sidebar:
+                st.markdown("---") # Linha divisória
+                st.markdown("### 💰 Simulador de Lucro")
+                st.caption("Estime sua receita com base no preço atual.")
+                
+                # Input para o produtor colocar a quantidade
+                qtd = st.number_input("Quantidade de Caixas/Sacos:", min_value=1, value=1, step=1)
+                
+                # Cálculo automático
+                lucro_estimado = qtd * ultimo_preco
+                
+                # Mostrando o resultado bonitinho
+                st.success(f"Receita Bruta: **R$ {lucro_estimado:,.2f}**")
+                st.info(f"Preço Base: R$ {ultimo_preco:.2f} /un")
+                st.markdown("---")
             col1, col2, col3 = st.columns(3)
             col1.metric(f"Preço Atual (C{classe_sel})", f"R$ {ultimo_preco:.2f}", f"{variacao:.1f}%")
             col2.metric("Tendência", "Alta" if variacao > 0 else ("Baixa" if variacao < 0 else "Estável"))
@@ -316,6 +329,7 @@ Use sotaque goiano e seja direto.
     
 
     
+
 
 
 

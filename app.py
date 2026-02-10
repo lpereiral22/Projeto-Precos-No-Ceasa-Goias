@@ -201,7 +201,7 @@ if not df.empty:
         # --- LÓGICA DE SELEÇÃO DE ANO ---
         df_f['data'] = pd.to_datetime(df_f['data'])
         anos_disponiveis = sorted(df_f['data'].dt.year.unique(), reverse=True)
-        ano_sel = st.sidebar.selectbox("📅 Selecione o Ano:", anos_disponiveis)
+        ano_sel = st.sidebar.selectbox("📅 De Qual Ano Você Quer Ver os Preços?", anos_disponiveis)
         
         df_exibicao = df_f[df_f['data'].dt.year == ano_sel]
 
@@ -222,7 +222,7 @@ if not df.empty:
             # --- SIDEBAR SIMULADOR ---
             with st.sidebar:
                   st.markdown("---")
-                  st.markdown("### 💰 Quanto eu ganho se eu entregar para o ceasa na cotação de hoje?")
+                  st.markdown("### 💰 Quanto Vale Minha Colheita Hoje?")
                   st.caption("Insira a quantidade abaixo para simular:")
                   qtd = st.number_input("Quantidade em Kg:", min_value=1, value=1, step=1)
                   lucro_estimado = qtd * ultimo_preco
@@ -337,6 +337,7 @@ st.markdown("""
     
 
     
+
 
 
 

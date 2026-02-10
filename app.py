@@ -207,35 +207,32 @@ if not df.empty:
 
         if not df_exibicao.empty:
             # --- MÉTRICAS ---
-            ultimo_preco = df_exibicao.iloc[-1]['preco']
+           ultimo_preco = df_exibicao.iloc[-1]['preco']
             variacao = 0.0
             if len(df_exibicao) > 1:
                 preco_anterior = df_exibicao.iloc[-2]['preco']
                 variacao = ((ultimo_preco - preco_anterior) / preco_anterior) * 100
+
+            # --- MÉTRICAS ---
             col1, col2, col3 = st.columns(3)
             col1.metric(f"Preço Atual (C{classe_sel})", f"R$ {ultimo_preco:.2f}", f"{variacao:.1f}%")
             col2.metric("Tendência", "Alta" if variacao > 0 else ("Baixa" if variacao < 0 else "Estável"))
             col3.metric("Status", "Favorável" if variacao >= 0 else "Atenção")
-with st.sidebar:
-                st.markdown("---") # Linha divisória
+
+            # --- SIMULADOR NO SIDEBAR ---
+            with st.sidebar:
+                st.markdown("---")
                 st.markdown("### 💰 Simulador de Lucro")
                 st.caption("Estime sua receita com base no preço atual.")
-                
-                # Input para o produtor colocar a quantidade
                 qtd = st.number_input("Quantidade de Caixas/Sacos:", min_value=1, value=1, step=1)
-                
-                # Cálculo automático
                 lucro_estimado = qtd * ultimo_preco
-                
-                # Mostrando o resultado bonitinho
                 st.success(f"Receita Bruta: **R$ {lucro_estimado:,.2f}**")
                 st.info(f"Preço Base: R$ {ultimo_preco:.2f} /un")
                 st.markdown("---")
-              
-# --- NOVIDADE: SEÇÃO DE RECORDES DO ANO ---
-   st.markdown(f"### 🏆 Recordes de {ano_sel}")
+
+            # --- SEÇÃO DE RECORDES DO ANO ---
+            st.markdown(f"### 🏆 Recordes de {ano_sel}")
             
-            # Encontrando os valores extremos no dataframe filtrado
             linha_max = df_exibicao.loc[df_exibicao['preco'].idxmax()]
             linha_min = df_exibicao.loc[df_exibicao['preco'].idxmin()]
 
@@ -330,6 +327,7 @@ Use sotaque goiano e seja direto.
     
 
     
+
 
 
 

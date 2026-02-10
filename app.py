@@ -178,7 +178,7 @@ st.title("Quanto Custa as Pimentas no _:green[Ceasa Goiás]_? 🌶️")
 # st.header("Preço Justo e Decisão Rápida")
 st.subheader("Monitore preços e tendências das pimentas comercializadas no Ceasa Goiás.")
 st.caption("Dados disponíveis em: goias.gov.br (https://goias.gov.br/ceasa/cotacoes-diarias-2026)")
-st.markdown (":green[___________________________________________________________________________________________________________]")
+st.markdown (":green[___________________________________________]")
 df = carregar_dados_unificados()
 
 if not df.empty:
@@ -282,3 +282,4 @@ Use sotaque goiano e seja direto.
     
 
     
+

@@ -208,7 +208,7 @@ if not df.empty:
         if not df_exibicao.empty:
             # --- MÉTRICAS ---
            ultimo_preco = df_exibicao.iloc[-1]['preco']
-      variacao = 0.0
+            variacao = 0.0
             if len(df_exibicao) > 1:
                 preco_anterior = df_exibicao.iloc[-2]['preco']
                 variacao = ((ultimo_preco - preco_anterior) / preco_anterior) * 100
@@ -327,6 +327,7 @@ Use sotaque goiano e seja direto.
     
 
     
+
 
 
 

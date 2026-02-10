@@ -222,8 +222,9 @@ if not df.empty:
             # --- SIDEBAR SIMULADOR ---
             with st.sidebar:
                 st.markdown("---")
-                st.markdown("### 💰 Simulador de Lucro")
-                qtd = st.number_input("Quantidade de Kg:", min_value=1, value=1, step=1)
+                st.markdown("### 💰 Quanto eu ganho se eu entregar para o ceasa na cotação de hoje?")
+                  st.caption("Insira a quantidade abaixo para simular:")
+                qtd = st.number_input("Quantidade em Kg:", min_value=1, value=1, step=1)
                 lucro_estimado = qtd * ultimo_preco
                 st.success(f"Receita Bruta: **R$ {lucro_estimado:,.2f}**")
                 st.info(f"Preço Base: R$ {ultimo_preco:.2f} /un")
@@ -336,6 +337,7 @@ st.markdown("""
     
 
     
+
 
 
 

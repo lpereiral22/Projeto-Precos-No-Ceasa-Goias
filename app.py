@@ -10,7 +10,7 @@ import emoji
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key=GOOGLE_API_KEY)
 
-st.sidebar.write("API carregada:", bool(GOOGLE_API_KEY))
+# st.sidebar.write("API carregada:", bool(GOOGLE_API_KEY))
 
 
 st.set_page_config(page_title="Painel do Produtor - Ceasa 2026", layout="wide")
@@ -140,7 +140,7 @@ def carregar_dados_unificados():
             df_api['produto'] = df_api['produto'].str.split('(').str[0].str.strip()
             
             df_api['classe'] = "1" # Padrão API costuma ser Classe 1
-            st.sidebar.success("✅ API Ceasa Conectada")
+            # st.sidebar.success("✅ API Ceasa Conectada")
     except Exception as e:
         st.sidebar.warning(f"⚠️ API Ceasa indisponível (usando apenas local)")
 
@@ -317,6 +317,7 @@ Use sotaque goiano e seja direto.
     
 
     
+
 
 
 

@@ -206,46 +206,41 @@ if not df.empty:
         df_exibicao = df_f[df_f['data'].dt.year == ano_sel]
 
         if not df_exibicao.empty:
-            # --- MÉTRICAS ---
-           ultimo_preco = df_exibicao.iloc[-1]['preco'] variacao = 0.0
+            # --- MÉTRICAS ---# --- CALCULOS ---
+            ultimo_preco = df_exibicao.iloc[-1]['preco']
+            variacao = 0.0
             if len(df_exibicao) > 1:
                 preco_anterior = df_exibicao.iloc[-2]['preco']
                 variacao = ((ultimo_preco - preco_anterior) / preco_anterior) * 100
 
-            # --- MÉTRICAS ---
+            # --- METRICAS ---
             col1, col2, col3 = st.columns(3)
             col1.metric(f"Preço Atual (C{classe_sel})", f"R$ {ultimo_preco:.2f}", f"{variacao:.1f}%")
             col2.metric("Tendência", "Alta" if variacao > 0 else ("Baixa" if variacao < 0 else "Estável"))
             col3.metric("Status", "Favorável" if variacao >= 0 else "Atenção")
 
-            # --- SIMULADOR NO SIDEBAR ---
+            # --- SIDEBAR SIMULADOR ---
             with st.sidebar:
                 st.markdown("---")
                 st.markdown("### 💰 Simulador de Lucro")
-                st.caption("Estime sua receita com base no preço atual.")
                 qtd = st.number_input("Quantidade de Caixas/Sacos:", min_value=1, value=1, step=1)
                 lucro_estimado = qtd * ultimo_preco
                 st.success(f"Receita Bruta: **R$ {lucro_estimado:,.2f}**")
                 st.info(f"Preço Base: R$ {ultimo_preco:.2f} /un")
                 st.markdown("---")
 
-            # --- SEÇÃO DE RECORDES DO ANO ---
+            # --- RECORDES ---
             st.markdown(f"### 🏆 Recordes de {ano_sel}")
-            
-            linha_max = df_exibicao.loc[df_exibicao['preco'].idxmax()]
-            linha_min = df_exibicao.loc[df_exibicao['preco'].idxmin()]
-
+            l_max = df_exibicao.loc[df_exibicao['preco'].idxmax()]
+            l_min = df_exibicao.loc[df_exibicao['preco'].idxmin()]
             rec1, rec2 = st.columns(2)
 
             with rec1:
                 st.markdown(f"""
                 <div style="background-color: rgba(0, 255, 127, 0.1); border: 1px solid #00ff7f; padding: 15px; border-radius: 10px;">
                     <h4 style="color: #00ff7f; margin: 0;">🚀 Preço Máximo</h4>
-                    <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">R$ {linha_max['preco']:.2f}</p>
-                    <p style="font-size: 14px; color: #cbd5e1;">
-                        <b>Data:</b> {linha_max['data'].strftime('%d/%m/%Y')}<br>
-                        <b>Produto:</b> {pimenta} | <b>Classe:</b> {classe_sel}
-                    </p>
+                    <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">R$ {l_max['preco']:.2f}</p>
+                    <p style="font-size: 14px; color: #cbd5e1;">Data: {l_max['data'].strftime('%d/%m/%Y')}</p>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -253,14 +248,10 @@ if not df.empty:
                 st.markdown(f"""
                 <div style="background-color: rgba(255, 69, 58, 0.1); border: 1px solid #ff453a; padding: 15px; border-radius: 10px;">
                     <h4 style="color: #ff453a; margin: 0;">📉 Preço Mínimo</h4>
-                    <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">R$ {linha_min['preco']:.2f}</p>
-                    <p style="font-size: 14px; color: #cbd5e1;">
-                        <b>Data:</b> {linha_min['data'].strftime('%d/%m/%Y')}<br>
-                        <b>Produto:</b> {pimenta} | <b>Classe:</b> {classe_sel}
-                    </p>
+                    <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">R$ {l_min['preco']:.2f}</p>
+                    <p style="font-size: 14px; color: #cbd5e1;">Data: {l_min['data'].strftime('%d/%m/%Y')}</p>
                 </div>
                 """, unsafe_allow_html=True)
-            
             st.markdown("<br>", unsafe_allow_html=True)
             
             # --- GRÁFICO (Único e Estilizado) ---
@@ -326,6 +317,7 @@ Use sotaque goiano e seja direto.
     
 
     
+
 
 
 

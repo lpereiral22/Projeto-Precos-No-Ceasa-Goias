@@ -218,7 +218,41 @@ if not df.empty:
             col1.metric(f"Preço Atual (C{classe_sel})", f"R$ {ultimo_preco:.2f}", f"{variacao:.1f}%")
             col2.metric("Tendência", "Alta" if variacao > 0 else ("Baixa" if variacao < 0 else "Estável"))
             col3.metric("Status", "Favorável" if variacao >= 0 else "Atenção")
+# --- NOVIDADE: SEÇÃO DE RECORDES DO ANO ---
+            st.markdown(f"### 🏆 Recordes de {ano_sel}")
+            
+            # Encontrando os valores extremos no dataframe filtrado
+            linha_max = df_exibicao.loc[df_exibicao['preco'].idxmax()]
+            linha_min = df_exibicao.loc[df_exibicao['preco'].idxmin()]
 
+            rec1, rec2 = st.columns(2)
+
+            with rec1:
+                st.markdown(f"""
+                <div style="background-color: rgba(0, 255, 127, 0.1); border: 1px solid #00ff7f; padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #00ff7f; margin: 0;">🚀 Preço Máximo</h4>
+                    <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">R$ {linha_max['preco']:.2f}</p>
+                    <p style="font-size: 14px; color: #cbd5e1;">
+                        <b>Data:</b> {linha_max['data'].strftime('%d/%m/%Y')}<br>
+                        <b>Produto:</b> {pimenta} | <b>Classe:</b> {classe_sel}
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+
+            with rec2:
+                st.markdown(f"""
+                <div style="background-color: rgba(255, 69, 58, 0.1); border: 1px solid #ff453a; padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #ff453a; margin: 0;">📉 Preço Mínimo</h4>
+                    <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">R$ {linha_min['preco']:.2f}</p>
+                    <p style="font-size: 14px; color: #cbd5e1;">
+                        <b>Data:</b> {linha_min['data'].strftime('%d/%m/%Y')}<br>
+                        <b>Produto:</b> {pimenta} | <b>Classe:</b> {classe_sel}
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            
             # --- GRÁFICO (Único e Estilizado) ---
             cor = '#00ff7f' if classe_sel == "1" else '#ffcc00'
             fig = px.area(df_exibicao, x='data', y='preco',
@@ -282,5 +316,6 @@ Use sotaque goiano e seja direto.
     
 
     
+
 
 

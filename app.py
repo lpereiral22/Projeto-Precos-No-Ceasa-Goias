@@ -223,7 +223,7 @@ if not df.empty:
             with st.sidebar:
                 st.markdown("---")
                 st.markdown("### 💰 Simulador de Lucro")
-                qtd = st.number_input("Quantidade de Caixas/Sacos:", min_value=1, value=1, step=1)
+                qtd = st.number_input("Quantidade de Kg:", min_value=1, value=1, step=1)
                 lucro_estimado = qtd * ultimo_preco
                 st.success(f"Receita Bruta: **R$ {lucro_estimado:,.2f}**")
                 st.info(f"Preço Base: R$ {ultimo_preco:.2f} /un")
@@ -312,11 +312,31 @@ Use sotaque goiano e seja direto.
             except Exception as e:
                 st.error("Falha na IA. Verifique a chave ou o modelo.")
                 st.code(str(e))
-
-
+# RODAPÉ
+st.markdown("""
+    <style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: rgba(15, 23, 42, 0.9);
+        color: #cbd5e1;
+        text-align: center;
+        padding: 8px;
+        font-size: 12px;
+        border-top: 1px solid rgba(0, 255, 127, 0.2);
+        z-index: 1000;
+    }
+    </style>
+    <div class="footer">
+        Desenvolvido por <b>Lucas Pereira Lima - https://www.linkedin.com/in/lpereiral22/</b> | Dados: Portal da Transparência CEASA-GO 🌶️
+    </div>
+""", unsafe_allow_html=True)
     
 
     
+
 
 
 

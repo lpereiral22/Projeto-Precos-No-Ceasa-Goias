@@ -294,7 +294,7 @@ if botao_ia:
     else:
         with st.spinner("IA analisando tendências da Ceasa..."):
             try:
-                model = genai.GenerativeModel('gemini-1.5-flash')
+                model = genai.GenerativeModel('gemini-pro')
 
                 dados_resumo = df_exibicao.tail(10)[["data", "preco"]].to_string(index=False)
 
@@ -337,6 +337,7 @@ st.markdown("""
     
 
     
+
 
 
 

@@ -4,3 +4,4 @@ primaryColor="#00ff7f"
 backgroundColor="#0f172a"
 secondaryBackgroundColor="#1e293b"
 textColor="#ffffff"
+google-generativeai>=0.8.3
